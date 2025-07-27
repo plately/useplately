@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plately – Group Dining Made Simple</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #ffffff, #f4fff6);
+      color: #1d4228;
+      padding: 4rem 2rem;
+    }
+    header {
+      text-align: center;
+      padding-bottom: 3rem;
+    }
+    header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    header p {
+      font-size: 1.25rem;
+      color: #555;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    form {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+    input[type="email"] {
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      border: 2px solid #3fa34d;
+      font-size: 1rem;
+      width: 300px;
+    }
+    button {
+      background: #3fa34d;
+      border: none;
+      padding: 0.75rem 2rem;
+      color: white;
+      font-size: 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #34943f;
+    }
+    .waitlist-count {
+      font-size: 1.3rem;
+      color: #3fa34d;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+      padding: 0 2rem;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid #e0e0e0;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    }
+    .card h3 {
+      margin-bottom: 0.75rem;
+      font-size: 1.25rem;
+      color: #2a5939;
+    }
+    .card p {
+      font-size: 1rem;
+      color: #444;
+      display: none;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 4rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Join the Future of Group Dining</h1>
+    <p>Plately helps you dine together and pay separately. Split bills fairly, order what you want, and never get overcharged again.</p>
+    <form action="#">
+      <input type="email" placeholder="Enter your email" required />
+      <button type="submit">Join Waitlist</button>
+    </form>
+    <div class="waitlist-count">
+      🚀 8,163 people already waitlisted
+    </div>
+  </header>
+
+  <section class="cards-grid">
+    <div class="card">
+      <h3>🙅‍♂️ No More Awkward Splits</h3>
+      <p>"I ordered water and fries… and somehow paid $42. Not anymore." Plately ensures you pay only for what you consume — and nothing more.</p>
+    </div>
+    <div class="card">
+      <h3>💳 Real-Time Itemized Orders</h3>
+      <p>Track your meal in real-time. When friends order shared items, tag who’s in. Everyone sees their own tab — no more mystery math.</p>
+    </div>
+    <div class="card">
+      <h3>📱 Pay Your Way</h3>
+      <p>“One person always pays and then gets ghosted in the group chat.” With Plately, everyone pays instantly — no more chasing people down.</p>
+    </div>
+    <div class="card">
+      <h3>👀 Unspoken Tension, Solved</h3>
+      <p>Remember that awkward eye contact with your friend when the check came? Plately ends silent guilt and social pressure.</p>
+    </div>
+    <div class="card">
+      <h3>🍸 Nights Out, Stress-Free</h3>
+      <p>Whether it’s cocktails or coffee, everyone orders on their own device and pays ahead. Spend less time calculating, more time vibing.</p>
+    </div>
+    <div class="card"><h3>🎯 Precision Splitting</h3><p>No guesswork. You know what you ordered, and you only pay for what you shared — down to the dollar.</p></div>
+    <div class="card"><h3>📊 Expense Tracking</h3><p>See your dining history, spending habits, and shared bills all in one dashboard.</p></div>
+    <div class="card"><h3>🎉 Perfect for Group Events</h3><p>Birthday dinner? Office lunch? Everyone pays their part in seconds. No organizer stress.</p></div>
+    <div class="card"><h3>🌐 Sync Across Devices</h3><p>Start your order on your phone, finish it on your tablet — your group tab stays in sync.</p></div>
+    <div class="card"><h3>⏱️ Faster Checkout</h3><p>No need to wait for the server with the check — pay through Plately and go.</p></div>
+    <div class="card"><h3>📍 Find Participating Restaurants</h3><p>Use Plately’s map to find spots near you that support direct group ordering and splitting.</p></div>
+    <div class="card"><h3>👤 Profiles and Preferences</h3><p>Set your dietary preferences, allergy warnings, and usual go-to picks for one-tap reordering.</p></div>
+    <div class="card"><h3>🛡️ No More Bill Bullies</h3><p>We all know that one friend who orders big and splits evenly — Plately stops that cold.</p></div>
+    <div class="card"><h3>🧾 Digital Receipts</h3><p>No paper, no problem. Get itemized digital receipts sent to your email instantly.</p></div>
+    <div class="card"><h3>🌱 Eco-Conscious Dining</h3><p>Go paperless and reduce food waste with digital coordination and accurate ordering.</p></div>
+    <div class="card"><h3>🎙️ Coming Soon: Voice Ordering</h3><p>“Add garlic fries to group” — we're building voice-command ordering. Get ready.</p></div>
+    <div class="card"><h3>🫶 Designed for Inclusivity</h3><p>Split unevenly, let someone cover for another — flexible settings for real friendships.</p></div>
+  </section>
+
+  <div class="footer">
+    Launching soon • Stay connected
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let count = 8163;
+      const display = document.querySelector('.waitlist-count');
+      setInterval(() => {
+        count++;
+        display.textContent = `🚀 ${count.toLocaleString()} people already waitlisted`;
+      }, 120000);
+
+      const cards = document.querySelectorAll(".card");
+      cards.forEach(card => {
+        card.addEventListener("click", () => {
+          const desc = card.querySelector("p");
+          const isVisible = desc.style.display === "block";
+          desc.style.display = isVisible ? "none" : "block";
+        });
+      });
+    });
+  </script>
+</body>
+</html>
