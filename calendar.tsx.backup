@@ -1,0 +1,187 @@
+import { useState } from "react";
+import { useLocation, Link } from "wouter";
+import { useAuth } from "@/hooks/useAuth";
+import { useToast } from "@/hooks/use-toast";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Eye, EyeOff, ArrowRight } from "lucide-react";
+import desqLogo from "@assets/desq-logo.png";
+
+export function LoginPage() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const { login, loginPending } = useAuth();
+  const [, setLocation] = useLocation();
+  const { toast } = useToast();
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await login({ username: username.trim(), password });
+      setLocation("/dashboard");
+    } catch (err: any) {
+      const msg = err?.message || "Invalid username or password";
+      setError(msg);
+      toast({ title: "Login failed", description: msg, variant: "destructive" });
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex">
+      {/* Left panel — brand */}
+      <div className="hidden lg:flex flex-col justify-between bg-black w-[30%] flex-shrink-0 p-12 relative overflow-hidden">
+        {/* Subtle grid pattern */}
+        <div
+          className="absolute inset-0 opacity-5"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }}
+        />
+
+        {/* Glowing orb */}
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2" />
+
+        <div className="relative z-10">
+          <img src={desqLogo} alt="desq" className="h-8 object-contain" style={{ filter: "invert(1)" }} />
+        </div>
+
+        <div className="relative z-10 space-y-6">
+          <h2 className="text-3xl font-bold text-white leading-snug">
+            Your team's
+            <br />
+            <span className="text-white/40">operating system</span>
+          </h2>
+          <p className="text-white/50 text-sm leading-relaxed max-w-xs">
+            Connect tasks, notes, meetings, and conversations into one unified workspace your whole team actually uses.
+          </p>
+
+          <div className="flex flex-col gap-3 pt-2">
+            {[
+              "Connected node-based workspace",
+              "Real-time collaboration",
+              "Discord sync built in",
+            ].map((item) => (
+              <div key={item} className="flex items-center gap-3">
+                <div className="w-1.5 h-1.5 bg-white/60 rounded-full flex-shrink-0" />
+                <span className="text-white/60 text-sm">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="relative z-10 text-white/20 text-xs">
+          © {new Date().getFullYear()} Desq
+        </div>
+      </div>
+
+      {/* Right panel — form */}
+      <div className="flex-1 flex flex-col justify-center items-center px-6 py-12 bg-white">
+        {/* Mobile logo */}
+        <div className="lg:hidden mb-10 text-center">
+          <img src={desqLogo} alt="desq" className="h-7 object-contain" />
+        </div>
+
+        <div className="w-full max-w-sm">
+          <div className="mb-8">
+            <h1 className="text-2xl font-bold text-gray-900 mb-1">Welcome back</h1>
+            <p className="text-gray-500 text-sm">Sign in to your Desq workspace</p>
+          </div>
+
+          <form onSubmit={handleLogin} className="space-y-5">
+            {error && (
+              <div className="rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
+                {error}
+              </div>
+            )}
+
+            <div className="space-y-1.5">
+              <Label htmlFor="username" className="text-sm font-medium text-gray-700">
+                Username
+              </Label>
+              <Input
+                id="username"
+                type="text"
+                placeholder="your username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="h-11 rounded-lg border-gray-200 focus:border-gray-900 focus:ring-gray-900/10 bg-white text-gray-900 placeholder:text-gray-400"
+                required
+                autoComplete="username"
+                autoFocus
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="password" className="text-sm font-medium text-gray-700">
+                  Password
+                </Label>
+                <Link href="/auth/forgot-password" className="text-xs text-gray-400 hover:text-gray-700 transition-colors">
+                  Forgot password?
+                </Link>
+              </div>
+              <div className="relative">
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="h-11 pr-11 rounded-lg border-gray-200 focus:border-gray-900 focus:ring-gray-900/10 bg-white text-gray-900 placeholder:text-gray-400"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            <Button
+              type="submit"
+              className="w-full h-11 bg-black hover:bg-gray-800 text-white rounded-lg font-medium text-sm transition-all"
+              disabled={loginPending}
+            >
+              {loginPending ? (
+                <div className="flex items-center justify-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  Signing in…
+                </div>
+              ) : (
+                <div className="flex items-center justify-center gap-2">
+                  Sign in
+                  <ArrowRight className="w-4 h-4" />
+                </div>
+              )}
+            </Button>
+          </form>
+
+          <p className="text-center text-sm text-gray-500 mt-6">
+            Don't have an account?{" "}
+            <Link href="/auth/register" className="text-gray-900 font-semibold hover:underline">
+              Create one
+            </Link>
+          </p>
+
+          {/* Demo hint */}
+          <div className="mt-8 rounded-xl bg-gray-50 border border-gray-100 px-4 py-3">
+            <p className="text-xs text-gray-500 font-medium mb-1.5">Demo access</p>
+            <p className="text-xs text-gray-400">
+              Username: <span className="font-mono text-gray-700">alex</span> · Password:{" "}
+              <span className="font-mono text-gray-700">password</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
